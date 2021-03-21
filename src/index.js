@@ -3,16 +3,25 @@ import ReactDOM from 'react-dom';
 import {createStore, applyMiddleware } from 'redux';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
+import {BrowserRouter, Route, Switch } from 'react-router-dom';
+
 import './index.css';
 import reducer from './reducers';
 import EventsIndex from './components/event_index';
-import reportWebVitals from './reportWebVitals';
+import EventsNew from './components/event_new';
+// import reportWebVitals from './reportWebVitals';
 
 const store = createStore(reducer, applyMiddleware(thunk));
 
 ReactDOM.render(
   <Provider store={store}>
-    <EventsIndex />
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/events/new" component={EventsNew} ></Route>
+        <Route exact path="/" component={EventsIndex} ></Route>
+      </Switch>
+    </BrowserRouter>
+    {/* <EventsIndex /> */}
   </Provider>,
   document.getElementById('root')
 );
@@ -20,4 +29,4 @@ ReactDOM.render(
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// reportWebVitals();
