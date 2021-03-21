@@ -23,6 +23,10 @@ import { readEvents } from '../actions';
 // )
 
 class EventsIndex extends Component {
+  constructor(props) {
+    super(props);
+    console.log("eventIndex");
+  }
   componentDidMount() {
     this.props.readEvents();
   }
@@ -31,7 +35,11 @@ class EventsIndex extends Component {
     return _.map(this.props.events, event => (
       <tr key={event.id}>
         <td>{event.id}</td>
-        <td>{event.title}</td>
+        <td>
+          <Link to={`/events/${event.id}`}>
+            {event.title}
+          </Link>
+        </td>
         <td>{event.body}</td>
       </tr>
     ));
@@ -53,7 +61,7 @@ class EventsIndex extends Component {
             </tbody>
         </table>
 
-        <Link to="/events/new">new Event</Link>
+        <Link to="/event/new">new Event</Link>
       </React.Fragment>
     );
   }
